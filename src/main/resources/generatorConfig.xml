@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="PostgreSQLTables" targetRuntime="MyBatis3">
+        <jdbcConnection driverClass="org.postgresql.Driver"
+                        connectionURL="jdbc:postgresql://localhost:5432/todo_db"
+                        userId="user"
+                        password="password"/>
+
+        <javaModelGenerator targetPackage="com.example.mybatisgeneratorsample.entity" targetProject="src/main/java">
+            <!-- enableSubPackagesをtrueにするとパッケージ階層の上にDBのスキーマの階層が作られる-->
+            <property name="enableSubPackages" value="true" />
+            <!-- trimStringsをtrueにするとDBから返される文字列を空白トリムするようになる、とあるが自動生成時なのか生成したSQLの挙動がそうなるのかわからず -->
+            <property name="trimStrings" value="true" />
+            <property name="exampleTargetPackage" value="com.example.mybatisgeneratorsample.example" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator targetPackage="com.example.mybatisgeneratorsample.mapper" targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+
+        <table tableName="projects" domainObjectName="Project"/>
+        <table tableName="todos" domainObjectName="Todo"/>
+    </context>
+</generatorConfiguration>
